@@ -54,7 +54,7 @@ namespace details {
     if (!is_bitflag)
       return static_cast<std::size_t>(max - min + 1);
 
-#if __clang_major__ >= 20
+#if defined(__clang_major__) && __clang_major__ >= 20
     if (!has_fixed_underlying) {
       auto        v = max;
       std::size_t r = 1;
@@ -127,7 +127,7 @@ namespace details {
 
 #if ENCHANTUM_CHECK_OUT_OF_BOUNDS_BY >= 2
     if constexpr (
-  #if __clang_major__ >= 20
+  #if defined(__clang_major__) && __clang_major__ >= 20
       has_fixed_underlying_type<E> &&
   #endif
       !details::has_specialized_traits<E>) {
